@@ -1,6 +1,7 @@
 # compiled binaries
 *.so *.o
-adjacency
+find_hairpins
+
 
 # text-editor temporary files:
 *~

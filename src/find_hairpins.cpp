@@ -398,6 +398,13 @@ ParseArgs(int argc,
         throw ArgParseErr(errmsg.str());
       }
     } //while (which_arg < argc)
+    if ((settings.n2 > settings.n1) && (settings.n1 != -1)) {
+      stringstream errmsg;
+      errmsg << "\nError: The n2 parameter (currently "<<settings.n2
+             <<") must not exceed n1 ("<<settings.n1<<").\n"
+             << "Use the \"-n1\" and \"-n2\" arguments to specify these parameters.\n";
+      throw ArgParseErr(errmsg.str());
+    }
   }
   catch (ArgParseErr& e)
   {
