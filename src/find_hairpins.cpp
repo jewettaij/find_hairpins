@@ -190,8 +190,8 @@ void FindHairpins(const vector<set<Iatm> >& m,
     } //while (continue_iter)
     if (1 + ib - ia >= ni)
       hairpins.insert(pair<Iatm,Iatm>(ia, ib));
-    if (i0+1/100 != i0/100)
-      cerr << "    progress: " << 100*(i0+1)/m.size() << "%" << endl;
+    if ( ((i0+1)*100)/m.size() > (i0*100)/m.size() )
+      cerr << "    progress: " << ((i0+1)*100)/m.size() << "%" << endl;
   } //for (Iatm i0 = 0; i0 < m.size(); i0++)
 } // FindHairpins
 
