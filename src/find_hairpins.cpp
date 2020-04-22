@@ -129,7 +129,7 @@ void FindHairpins(const vector<set<Iatm> >& m,
       //   |                                       @
       //   |                                         @                 
       //   |                                           @               hairpin
-      //   |                                             @ <-- (i0,i0) ends here
+      //   |                                             @ <-- (i0,i0) tip here
       //   |
       //   |
       //   |
@@ -147,8 +147,8 @@ void FindHairpins(const vector<set<Iatm> >& m,
       // demarcating the beginning and ending of the hairpin.
       //
       // Search order:
-      // For this algorithm, I choose to give preference to pairs that:
-      // 1) minimize the gap size on either/both sides (max(ia-sa, sb-ib)
+      //   I choose to give preference to pairs that:
+      // 1) minimize the larger gap size on either side (max(ia-sa, sb-ib)
       // 2) minimize the difference in gap size |(ia-sa)-(sb-ib)|
 
       // d is distance along along the diagonal (see diagram)
@@ -156,15 +156,11 @@ void FindHairpins(const vector<set<Iatm> >& m,
            (! continue_iter) && (d <= n1);
            d++)
       {
-        //cerr << "  (began d=" << d << ")" << endl;    KRUFT
-
         // c is distance away from the diagonal (see diagram)
         for (Iatm c = std::max(d - n2, static_cast<Iatm>(0));
              (! continue_iter) && (c <= d);
              c++)
         {
-          //cerr << "    (began c=" << c << ")" << endl;    KRUFT
-
           // Check for pairs of points on either side of the "d" diagonal.
           // First check to the left of the "d" axis.  (See diagram.)
           sa = ia - (d - c);
@@ -185,9 +181,7 @@ void FindHairpins(const vector<set<Iatm> >& m,
               break;
             }
           }
-          //cerr << "    (finished c=" << c << ")" << endl;    KRUFT
         } // loop over c
-        //cerr << "  (finished d=" << d << ")" << endl;    KRUFT
       } // loop over d
       if (continue_iter) {
         ia = sa; // get ready for the next iteration
@@ -196,13 +190,15 @@ void FindHairpins(const vector<set<Iatm> >& m,
     } //while (continue_iter)
     if (1 + ib - ia >= ni)
       hairpins.insert(pair<Iatm,Iatm>(ia, ib));
+    if (i0+1/100 != i0/100)
+      cerr << "    progress: " << 100*(i0+1)/m.size() << "%" << endl;
   } //for (Iatm i0 = 0; i0 < m.size(); i0++)
 } // FindHairpins
 
 
 
 
-
+// THIS FUNCTION IS INEFFICIENT.  I SHOULD REWRITE IT
 void 
 CalcAdjacency(vector<set<Iatm> >& m,
               ConstVect *aaX,  // <--> equivalent to "double (*x)[g_dim],"
@@ -403,20 +399,18 @@ ParseArgs(int argc,
     if ((settings.n2 > settings.n1) && (settings.n1 != 0)) {
       stringstream errmsg;
       errmsg << "\nError: The n2 parameter (currently "<<settings.n2
-             <<") must not exceed n1 ("<<settings.n1<<").\n"
-             << "Use the \"-n1\" and \"-n2\" arguments to specify these parameters.\n";
+             <<") must not exceed n1 (currently "<<settings.n1<<").\n"
+             << "(Use the \"-n1\" and \"-n2\" arguments to specify these parameters.)\n";
       throw ArgParseErr(errmsg.str());
     }
   }
   catch (ArgParseErr& e)
   {
     cerr << "--------------------------------------------------\n";
-    cerr << "--------------------------------------------------\n";
     cerr << "       Error in argument list: \n" << e.what() << endl;
     cerr << "--------------------------------------------------\n";
-    cerr << "--------------------------------------------------\n";
     cerr << "\n";
-    cerr << explanation.str() << endl;
+    //cerr << explanation.str() << endl;
     exit(-1);
   }
 
@@ -514,14 +508,14 @@ main(int argc, char **argv)
     if (frame_counter > 0) {
       // Now print the results
       set<pair<Iatm,Iatm> > hairpins;
-      cerr << "  Finding hairpins" << endl;
+      cerr << "  Finding hairpins:" << endl;
       FindHairpins(m_tot,
                    hairpins,
                    settings.n1,
                    settings.n2,
                    settings.ni);
 
-      cerr << "  Printing list of hairpins" << endl;
+      cerr << "  Printing list of hairpins:" << endl;
       PrintHairpins(hairpins, cout);
     }
 

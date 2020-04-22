@@ -122,7 +122,6 @@ Bins::Bins(ConstVect *aaX,
   for (int d = 0; d < g_dim; d++) {
     // Find the number of bins in each direction.
     // Add some padding to make sure box width is an integer multiple of rcut.
-    //aNbins[d] = static_cast<Icrd>(ceil((bboxhi[d]-bboxlo[d]) / rcut));
     aNbins[d] = static_cast<Icrd>(ceil(0.01 + (bboxhi[d]-bboxlo[d]) / rcut));
     aNbins[d] += 2; // Make sure enough space for a bin on each side of each
                     // atom.  No atom should lie at the boundary of empty space

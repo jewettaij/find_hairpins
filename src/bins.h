@@ -164,7 +164,6 @@ class Bins {
       size = aNbins[d];
       next_ib  = ib / size;
       aIcrd[d] = ib % size;  
-      //aIcrd[d] = ib - size*next_ib;  alternate version
 
       assert((0 <= aIcrd[d]) && (aIcrd[d] < aNbins[d]));
       ib = next_ib;
@@ -189,10 +188,10 @@ class Bins {
       // In that case, use this code:
       //
       //Ibin ib  = IbinFromX(aaX[ia]);
-      //aNextFromIatm[ia]  = aHeadFromIbin[ib];
+      //aNextFromIatm[ia] = aHeadFromIbin[ib];
       //aHeadFromIbin[ib] = ia;
       //
-      // New version tries to be more memory efficient (if occasionally slower)
+      // New version tries to be more memory efficient (if slower)
       // by allowing multiple different lattice sites to use the same bin
       // in memory. To save memory, we do not allow num_bins to exceed num_atoms
       // and use modulo arithmetic to make sure the index ("ibb") into the
@@ -205,7 +204,6 @@ class Bins {
       aBinFromIatm[ia] = ib;
     }
   }
-
 
 
   // Find the coordinates of the next neighbor bin (voxel) adjacent to aIcrd.

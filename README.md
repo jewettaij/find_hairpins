@@ -11,8 +11,8 @@ you can selectively search for straight or branched polymers.
 ### *Note: This repository may be removed later*
 *In the future, this repository may be
  removed or absorbed into a different project.
-Some of the moltemplate examples require this program to verify that they
-are working correctly , so I decided to make this (rather ugly) code public.*
+Some of the moltemplate examples require this program to verify that they are
+working correctly. So I decided to make this (ugly, inefficient) code public.*
 
 ### Definition: hairpin
 
@@ -69,6 +69,9 @@ i3 j3
 Here "i" and "j" refer to the ID numbers (indices) of two different
 points along the curve.
 The loop-length (or branch-length) can be inferred using |i-j|+1.
+
+*NOTE: Indexing begins at 0.  In other words, "0" refers the the
+first point in the curve (not 1).*
 
 
 ### Input format (.RAW file format):
@@ -196,8 +199,9 @@ and then follow the instructions above.
 
 This program was quickly written has only tested on a few point clouds.
 Some of the arguments documented above may not yet work.
+Not much thought was given to making the code run quickly.
 
 
 ## License
 
-*adjacency_ubin* is available under the terms of the [GPL-2.0 license](LICENSE.txt).
+*find_hairpins* is available under the terms of the [GPL-2.0 license](LICENSE.txt).
