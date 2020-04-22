@@ -156,13 +156,15 @@ void FindHairpins(const vector<set<Iatm> >& m,
            (! continue_iter) && (d <= n1);
            d++)
       {
-        cerr << "  (began d=" << d << ")" << endl;
+        //cerr << "  (began d=" << d << ")" << endl;    KRUFT
+
         // c is distance away from the diagonal (see diagram)
         for (Iatm c = std::max(d - n2, static_cast<Iatm>(0));
              (! continue_iter) && (c <= d);
              c++)
         {
-          cerr << "    (began c=" << c << ")" << endl;
+          //cerr << "    (began c=" << c << ")" << endl;    KRUFT
+
           // Check for pairs of points on either side of the "d" diagonal.
           // First check to the left of the "d" axis.  (See diagram.)
           sa = ia - (d - c);
@@ -183,9 +185,9 @@ void FindHairpins(const vector<set<Iatm> >& m,
               break;
             }
           }
-          cerr << "    (finished c=" << c << ")" << endl;
+          //cerr << "    (finished c=" << c << ")" << endl;    KRUFT
         } // loop over c
-        cerr << "  (finished d=" << d << ")" << endl;
+        //cerr << "  (finished d=" << d << ")" << endl;    KRUFT
       } // loop over d
       if (continue_iter) {
         ia = sa; // get ready for the next iteration
@@ -275,7 +277,7 @@ ParseArgs(int argc,
     "\n"
     "Optional arguments:\n"
     "\n"
-    "  -r rcut   <- specify the threshold contact distance (1.5 by default).\n"
+    "  -r rcut      <- specify the threshold contact distance (1.5 by default).\n"
     "\n"
     "  -n1 n1       <-can skip n1 points in either side of the loop\n"
     "                 without discarding the hairpin\n"
@@ -398,7 +400,7 @@ ParseArgs(int argc,
         throw ArgParseErr(errmsg.str());
       }
     } //while (which_arg < argc)
-    if ((settings.n2 > settings.n1) && (settings.n1 != -1)) {
+    if ((settings.n2 > settings.n1) && (settings.n1 != 0)) {
       stringstream errmsg;
       errmsg << "\nError: The n2 parameter (currently "<<settings.n2
              <<") must not exceed n1 ("<<settings.n1<<").\n"
