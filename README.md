@@ -8,6 +8,21 @@ a list of the positions of points uniformly distributed along its length.
 By choosing the *n1* and *n2* parameters (see below)
 you can selectively search for straight or branched polymers.
 
+
+## Development Status: *NOT WORKING*
+
+***PLEASE IGNORE THIS REPOSITORY.***
+
+This code does not work on the dense plectonemic supercoiled curves
+for which it was intended.  There are ways to fix this which are not
+difficult, but I have postponed work on this repository.
+-Andrew  2020-4-23.
+
+In addition, this program was quickly written
+has only tested on a few sparse point clouds.
+Some of the arguments documented above may not yet work.
+Not much thought was given to making the code run quickly.
+
 ### *Note: This repository may be removed later*
 *In the future, this repository may be
  removed or absorbed into a different project.
@@ -193,13 +208,6 @@ sudo apt-get install build-essential
 ```
 and then follow the instructions above.
 (Older windows users can install Cygwin or MinGW, or linux via virtualbox.)
-
-
-## Development Status: *alpha*
-
-This program was quickly written has only tested on a few point clouds.
-Some of the arguments documented above may not yet work.
-Not much thought was given to making the code run quickly.
 
 
 ## License
