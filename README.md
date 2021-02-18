@@ -213,3 +213,4 @@ and then follow the instructions above.
 ## License
 
 *find_hairpins* is available under the terms of the [GPL-2.0 license](LICENSE.txt).
+
